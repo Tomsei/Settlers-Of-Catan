@@ -46,6 +46,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   item:
     name: Holz
+    Farbe: {r: 1, g: 0, b: 0, a: 1}
     id: 0
 --- !u!1001 &3460615109745366763
 PrefabInstance:

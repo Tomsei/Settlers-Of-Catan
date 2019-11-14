@@ -6,5 +6,6 @@ using UnityEngine;
 public struct Item
 {
     public string name;
+    public Color Farbe;         //zur spielfeld generierung
     public int id;
 }
