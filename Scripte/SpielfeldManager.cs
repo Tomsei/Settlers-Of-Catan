@@ -79,7 +79,7 @@ public class SpielfeldManager : MonoBehaviour
     }
 
     /// <summary>
-    /// gibt die id des ERSTEN inhaltes zurück der diese farbe besitzt
+    /// gibt die id des ersten inhaltes zurück der diese farbe besitzt
     /// </summary>
     /// <param name="col">
     /// die zu suchende fabe
