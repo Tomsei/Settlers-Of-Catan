@@ -66,7 +66,6 @@ public class SpielfeldManager : MonoBehaviour
         x += _x * breitenMultiplier;
         y += _y * höhenMultiplier;
 
-        Debug.Log(_x + "," + _y + ";" + x + "," + y);
         return new Vector3(x, 0, y);
     }
 
