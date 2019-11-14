@@ -40,7 +40,7 @@ public class SpielfeldManager : MonoBehaviour
                     spielfeld[x, y].transform.parent = transform;
                     spielfeld[x, y].transform.localPosition = calculatePos(x, y);
                     spielfeld[x, y].initInhalt(inhaltePrefab[id]);
-                    spielfeld[x, y].GetComponentInChildren<Renderer>().material.color = Random.ColorHSV();
+                    spielfeld[x, y].GetComponentInChildren<Renderer>().material.color = spielfeld[x, y].inhalt.item.Farbe;
                 }
             }
         }
