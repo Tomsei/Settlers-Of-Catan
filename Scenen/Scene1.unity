@@ -276,9 +276,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d2849b4a99e91d4db03daa20ebb0f05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  zoomInKey: 119
-  zoomOutKey: 115
-  zoomMouseInvert: 0
+  CameraZoomInKey: 113
+  CameraZoomOutKey: 101
+  CameraZoomMouseInvert: 0
+  CamereMoveLKey: 100
+  CamereMoveRKey: 97
+  CamereMoveFKey: 119
+  CamereMoveBKey: 115
+  CameraMoveMouseButton: 2
+  CamereRotateLKey: 276
+  CamereRotateRKey: 275
+  CamereRotateUKey: 273
+  CamereRotateDKey: 274
+  CameraRotateMouseButton: 1
 --- !u!1 &660783203
 GameObject:
   m_ObjectHideFlags: 0
@@ -303,7 +313,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 660783203}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.06, y: 1.08, z: 5.96}
+  m_LocalPosition: {x: 8, y: 1.08, z: 8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -410,3 +420,14 @@ MonoBehaviour:
   zoomSmothScaler: 1
   zoomMinDist: 1
   zoomMaxDist: 50
+  moveScaler: 0.2
+  moveSmothScaler: 5
+  moveXPosMax: 100
+  moveXPosMin: -100
+  moveZPosMax: 100
+  moveZPosMin: -100
+  rotateScaler: 1
+  rotateSmothScaler: 0.2
+  rotateVertikalMaxWinkel: 80
+  rotateVertikalMinWinkel: 10
+  rotateVertikaleSollWinkel: 45
