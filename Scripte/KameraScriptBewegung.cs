@@ -2,38 +2,68 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class KameraScriptBewegung : MonoBehaviour , InputManager.IListener
-{
 
+/// <summary>
+/// Klasse zum behandeln der gesamten Kamera Bewegung
+/// Implementiert IInputListener um Input-Werte zu erhalten
+/// </summary>
+public class KameraScriptBewegung : MonoBehaviour , InputManager.IInputListener
+{
+    //Der Punkt auf den die Kamera schaut 
     public Transform pointer;
 
+    //Einstellungen des Zoomens
     public float zoomScaler;
-    public float zoomSmothScaler;
+    public float zoomSmothScaler;               //Wie viele änderungen pro Frame am Wert
     public float zoomMinDist;
     public float zoomMaxDist;
 
-    private float pointerDistance = 50;
+    //Ziel Entfernung der Kamera
+    private float pointerSollDistance = 50;
     
+
+    /// <summary>
+    /// Anmeldung für die Callbacks (Input...)
+    /// </summary>
     public void Start()
     {
-        InputManager.controller.callback.Add(0, this);
+        InputManager.controller.callback.Add(0, this);          //Liste des InputManagers
     }
 
+    /// <summary>
+    /// Alle Frame-Abhängigen Kamera Bewegungen ausführen
+    /// </summary>
     private void Update()
     {
+        //Drehung zum Pointer
         transform.LookAt(pointer);
 
         updateDistance();
     }
 
+    /// <summary>
+    /// Methode ist zuständig für das zoomen
+    /// Sie veränder die Distanz zum Pointer
+    /// </summary>
     private void updateDistance()
     {
+        //Momentane Distanz zwischen Pointer + Kamera (Achsenunabhängig)
         float dist = Vector3.Distance(pointer.position,transform.position);
-        float differenz = dist - pointerDistance;
+        //Unterschied zwischen momentaner + soll Distanz
+        float differenz = dist - pointerSollDistance;
 
+        //transform.forward: Ein Schritt in eigener Rotation vorwärts
+        //zoomSmothScaler: Multiplikator zur Steuerung
         transform.position += transform.forward * differenz * Time.deltaTime * zoomSmothScaler;
     }
 
+
+    /// <summary>
+    /// Interface Methode Callback
+    /// Über Switch Case Auswhälen welches Event der Kamera ausgefürht werden soll
+    /// </summary>
+    /// <param name="eventId">ID des Events (welche Aufgabe wird gemacht)</param>
+    /// <param name="value">der zu übergebende Wert</param>
     public void callBack(int eventId, int value)
     {
         switch (eventId)
@@ -49,18 +79,19 @@ public class KameraScriptBewegung : MonoBehaviour , InputManager.IListener
     }
 
     /// <summary>
-    /// zoom zum pointer
+    /// Aktualisierung des Sollwertes der Distanz beim Zoomen
+    /// --> durch aktualisierten Wert hat updateDistance auswirkungen
     /// </summary>
     /// <param name="ScrollWert">
-    /// wenn positiv dann entfernen
-    /// wenn negativ dann ranzoomen
+    /// wenn positiv dann Sollwert erhöhen --> später raussumen
+    /// wenn negativ dann Sollwert verringern --> später reinsumen
     /// </param>
     public void zoom(int ScrollWert)
     {
-        pointerDistance += ScrollWert * zoomScaler;
-        if (pointerDistance < zoomMinDist)
-            pointerDistance = zoomMinDist;
-        if (pointerDistance > zoomMaxDist)
-            pointerDistance = zoomMaxDist;
+        pointerSollDistance += ScrollWert * zoomScaler;
+        if (pointerSollDistance < zoomMinDist)
+            pointerSollDistance = zoomMinDist;
+        if (pointerSollDistance > zoomMaxDist)
+            pointerSollDistance = zoomMaxDist;
     }
 }
